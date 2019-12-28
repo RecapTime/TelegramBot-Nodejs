@@ -1,22 +1,30 @@
-// server.js
-// where your node app starts
-
 // init project
 const express = require("express");
 const app = express();
+const TelegramBot = require("node-telegram-bot-api");
 
-// we've started you off with Express,
-// but feel free to use whatever libs or frameworks you'd like through `package.json`.
+// Pull token from environment variables
+const token = process.env.TGBOT_TOKEN;
 
-// http://expressjs.com/en/starter/static-files.html
-app.use(express.static("public"));
+// Start the bot
+const bot = new TelegramBot(token, { polling: true });
 
-// http://expressjs.com/en/starter/basic-routing.html
-app.get("/", function(request, response) {
-  response.sendFile(__dirname + "/views/index.html");
+bot.onText(/\/start/, msg => {
+  bot.sendMessage(
+    msg.chat.id,
+    "Welcome to the **Recap Time Bot**! The bot is currently work in progress. More features soon!" +
+      "\n\n" +
+      "`Version 0.5.0-canary Released on 12-28-2019 by Andrei Jiroh Halili (@AJHalili2006)`",
+    { parse_mode: "Markdown" }
+  );
 });
 
-// listen for requests :)
-const listener = app.listen(process.env.PORT, function() {
-  console.log("Your app is listening on port " + listener.address().port);
+bot.on("message", msg => {
+  const chatId = msg.chat.id;
+
+  // send a message to the chat acknowledging receipt of their message
+  bot.sendMessage(
+    chatId,
+    "I heard you about that. Processing data..."
+  );
 });
