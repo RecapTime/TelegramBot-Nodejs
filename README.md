@@ -17,10 +17,18 @@ git clone https://api.glitch.com/git/handsome-sheet
 git clone https://gitlab.com/MadeByThePinsTeam-DevLabs/RecapTime/tgbot-nodejs
 ```
 - Open `.env.test` file and configure environment variables.
-```
-## Get token after creating your bot
+```bash
+## Get token from BotFather after creating your bot or after rolling some.
 export TGBOT_TOKEN=<your token from @BotFather>
+
+## Set APP_URL for webhooks, must be on secure connections as per Telegram Bots API Documentation
+export APP_URL=https://myapp.you-and-me.dev
+
+## Set PORT to 3000, but take your pick.
+export PORT=3000
 ```
+- Edit `server.js` as usual. See `docs/LOCAL_TESTING.md`
+- If you satsified, run `npm start`
 
 ### Deploy on Glitch.com
 1. [Remix the project](https://glitch.com/edit/#!/remix/handsome-sheet), copy contents from `.env.test` file.

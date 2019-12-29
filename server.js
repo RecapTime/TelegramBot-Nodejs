@@ -51,7 +51,13 @@ bot.onText(/\/start/, msg => {
     chatId,
     "Welcome to the *Recap Time bot!*" +
       "\n\n" +
-      "Currently, the bot is still work in process and everyone can",
+      "Currently, the bot is still work in process and everyone can contribute to improve the bot",
     { parse_mode: "markdown" }
   );
+});
+
+// Remove the code below for local deployments and deployments outside Glitch.com
+process.on("SIGTERM", function () {
+  console.log("SIGTERM received, sending SOS to Resurrect...");
+  require('https').get("https://resurrect.glitch.me/"+process.env.PROJECT_DOMAIN+"/optional/path/here", process.exit);
 });
