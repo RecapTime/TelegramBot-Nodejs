@@ -3,8 +3,9 @@ const express = require("express");
 const app = express();
 const TelegramBot = require("node-telegram-bot-api");
 const bodyParser = require("body-parser");
-const { QueueManager } = require("node-telegram-operation-manager");
 
+// Extend bot features with community builds
+const { QueueManager } = require("node-telegram-operation-manager");
 
 // Pull token from environment variables, start with your Telegram Bot token
 const token = process.env.TGBOT_TOKEN;
