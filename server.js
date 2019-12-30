@@ -51,7 +51,9 @@ bot.onText(/\/start/, msg => {
     chatId,
     "Welcome to the *Recap Time bot!*" +
       "\n\n" +
-      "Currently, the bot is still work in process and everyone can contribute to improve the bot",
+      "Currently, the bot is still work in process and everyone can contribute to improve the bot." +
+    "\n\n" +
+    "To contribute, use",
     { parse_mode: "markdown" }
   );
 });
