@@ -10,9 +10,9 @@ const { QueueManager } = require("node-telegram-operation-manager");
 // Pull token from environment variables, start with your Telegram Bot token
 const token = process.env.TGBOT_TOKEN;
 
-// Get url and port from env
-const url = process.env.APP_URL;
-const port = process.env.PORT;
+// Get url and port from env. The NOW_URL is reserved for Zeit Now deployments
+const url = process.env.APP_URL || process.env.NOW_URL;
+const port = process.env.PORT || 443;
 
 // Start the bot
 const bot = new TelegramBot(token);
