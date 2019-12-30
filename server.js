@@ -75,7 +75,7 @@ bot.onText(/\/start/, msg => {
 });
 
 bot.onText(/\/contribute/, msg =>
-  bot.sendMessage(msg.chat.id, "We love contributions", { parse_mode: "markdown" })
+  bot.sendMessage(msg.chat.id, "We love contributions in order to make this bot more powerful", { parse_mode: "markdown" })
 );
 
 // Remove the code below for local deployments and deployments outside Glitch.com
