@@ -9,7 +9,7 @@
   "scripts": {
     "start": "node server.js",
     "build": "node server.js",
-    "now": "npm install @now"
+    "now": "npm install now && now --token $NOW_TOKEN"
   },
   "dependencies": {
     "body-parser": "^1.19.0",
