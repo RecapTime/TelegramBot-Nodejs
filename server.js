@@ -29,14 +29,19 @@ app.post(`/webhook/tgbot-${token}`, (req, res) => {
   res.sendStatus(200);
 });
 
-app.use('/static', express.static('public'))
-app.use(express.static('views'))
+app.use("/static", express.static("public"));
+app.use(express.static("views"));
 
-function clientErrorHandler (err, req, res, next) {
+function clientErrorHandler(err, req, res, next) {
   if (req.xhr) {
-    res.status(500).send({ error: 'Something went berserk. Contact Bot Support or hang tight an few hours.' })
+    res
+      .status(500)
+      .send({
+        error:
+          "Something went berserk. Contact Bot Support or hang tight an few hours."
+      });
   } else {
-    next(err)
+    next(err);
   }
 }
 
@@ -63,14 +68,23 @@ bot.onText(/\/start/, msg => {
     "Welcome to the *Recap Time bot!*" +
       "\n\n" +
       "Currently, the bot is still work in process and everyone can contribute to improve the bot." +
-    "\n\n" +
-    "To contribute, use",
+      "\n\n" +
+      "To contribute, use /contribute for details.",
     { parse_mode: "markdown" }
   );
 });
 
+bot.onText(/\/contribute/, msg =>
+  bot.sendMessage(msg.chat.id, "We love contributions", { parse_mode: "markdown" })
+);
+
 // Remove the code below for local deployments and deployments outside Glitch.com
-process.on("SIGTERM", function () {
+process.on("SIGTERM", function() {
   console.log("SIGTERM received, sending SOS to Resurrect...");
-  require('https').get("https://resurrect.glitch.me/"+process.env.PROJECT_DOMAIN+"/optional/path/here", process.exit);
+  require("https").get(
+    "https://resurrect.glitch.me/" +
+      process.env.PROJECT_DOMAIN +
+      "/optional/path/here",
+    process.exit
+  );
 });
