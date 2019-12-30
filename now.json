@@ -1,9 +1,12 @@
 {
-  "build": {
-    "env": {
-      "//1": "Get your Telegram Bot token from BotFather.",
-      "TGBOT_TOKEN": "",
-      "PORT": "443"
-    }
+  "version": "2",
+  "name": "recaptime-tgbot-nodejs",
+  "env": {
+    "PORT": "443",
+    "NODE_ENV": "production"
+  },
+  "builds": {
+    "scr": ".js",
+    "use": "@now/nodejs"
   }
 }
