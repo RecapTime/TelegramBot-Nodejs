@@ -29,8 +29,16 @@ app.post(`/webhook/tgbot-${token}`, (req, res) => {
   res.sendStatus(200);
 });
 
-app.use(express.static('public'))
+app.use('/static', express.static('public'))
 app.use(express.static('views'))
+
+function clientErrorHandler (err, req, res, next) {
+  if (req.xhr) {
+    res.status(500).send({ error: 'Something went berserk. Contact Bot Support or hang tight an few hours.' })
+  } else {
+    next(err)
+  }
+}
 
 // Start Express Server
 app.listen(port, () => {
