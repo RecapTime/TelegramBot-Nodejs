@@ -29,6 +29,9 @@ app.post(`/webhook/tgbot-${token}`, (req, res) => {
   res.sendStatus(200);
 });
 
+app.use(express.static('public'))
+app.use(express.static('views'))
+
 // Start Express Server
 app.listen(port, () => {
   // Test
