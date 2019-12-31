@@ -3,6 +3,7 @@ Recap Time Node.js Telegram Bot
 
 The Telegram bot for our [Recap Time bot](https://t.me/RecapTime_bot) is fully re-written in Node.js from strach. 
 
+If you want to contribute, please use [our GitLab mirror](https://gitlab.com/MadeByThePinsTeam-DevLabs/RecapTime-Staff/recaptime-tgbot-nodejs) and [the original Glitch project](https://glitch.com/edit/#!/handsome-sheet). We'll stop our support services for GitHub users, so our apologies.
 ## Setup and Usage
 
 ### Local Testing
