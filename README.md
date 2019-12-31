@@ -1,5 +1,7 @@
-Recap Time Bot
+Recap Time Node.js Telegram Bot
 ===========
+
+The Telegram bot for our [Recap Time bot](https://t.me/)
 
 ## Setup and Usage
 

@@ -6,6 +6,5 @@
     "PORT": "443",
     "NODE_ENV": "production"
   },
-  "build":
-    {"scr": "*.js", "use": "@now/nodejs"}
+  "build": [{ "scr": "*.js", "use": "@now/nodejs" }]
 }

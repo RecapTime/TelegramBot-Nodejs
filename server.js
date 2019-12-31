@@ -32,13 +32,29 @@ app.post(`/webhook/tgbot-${token}`, (req, res) => {
 app.use("/static", express.static("public"));
 app.use(express.static("views"));
 
+app.get("/", function (request, response) {
+  response.sendFile(__dirname + '/views/index.html');
+});
+
+app.get("/offline", function (request, response) {
+  response.sendFile(__dirname + '/views/offline.html');
+});
+
+app.get("/manifest.json", function (request, response) {
+  response.sendFile(__dirname + '/views/manifest.json');
+});
+
+app.get("*", function (request, response) {
+  response.sendFile(__dirname + '/views/404.html');
+});
+
 function clientErrorHandler(err, req, res, next) {
   if (req.xhr) {
     res
       .status(500)
       .send({
         error:
-          "Something went berserk. Contact Bot Support or hang tight an few hours."
+          "Something went berserk on our side. Contact Bot Support or hang tight an few hours."
       });
   } else {
     next(err);
