@@ -64,8 +64,8 @@ function getFilesInDirectory(dir) {
 app.get("/docs", function (request, response) {
   response.header("Cache-Control", "max-age=0");
   const files = {};
-  getFilesInDirectory('md').sort().forEach(path => {
-    const fileName = path.replace(/md\/(.*)\.md/, '$1'); //trim off "md/" and ".md"
+  getFilesInDirectory('docs').sort().forEach(path => {
+    const fileName = path.replace(/docs\/(.*)\.md/, '$1'); //trim off "docs/" and ".md"
     files[fileName] = fs.readFileSync(path, 'utf8');
   });
   response.send(files);

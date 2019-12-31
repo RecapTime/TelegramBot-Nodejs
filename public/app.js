@@ -1,6 +1,6 @@
 /* globals markdownit */
 
-const DEFAULT_PAGE="welcome";
+const DEFAULT_PAGE="index";
 const PINNED_PAGES = [DEFAULT_PAGE];
 
 var md = new markdownit({
