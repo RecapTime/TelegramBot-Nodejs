@@ -1,5 +1,5 @@
 // init project
-var fs = require('fs');
+var fs = require("fs");
 const express = require("express");
 const app = express();
 const TelegramBot = require("node-telegram-bot-api");
@@ -31,69 +31,73 @@ app.post(`/webhook/tgbot-${token}`, (req, res) => {
 });
 
 // Redirect remote files to secure side
-function checkHttps(req, res, next){
+function checkHttps(req, res, next) {
   // protocol check, if http, redirect to https
-  
-  if(req.get('X-Forwarded-Proto').indexOf("https")!=-1){
+
+  if (req.get("X-Forwarded-Proto").indexOf("https") != -1) {
     //console.log("https, yo")
-    return next()
+    return next();
   } else {
     //console.log("just http")
-    res.redirect('https://' + req.hostname + req.url);
+    res.redirect("https://" + req.hostname + req.url);
   }
 }
 
-app.all('*', checkHttps)
+app.all("*", checkHttps);
 
 // Documentation Files
-app.use(express.static('public'));
+app.use(express.static("public"));
 
 function getFilesInDirectory(dir) {
-  return [].concat(...fs.readdirSync(dir).map(name => {
-    const path = dir + '/' + name;
-    const stats = fs.statSync(path);
-    if (stats.isDirectory()) {
-      return getFilesInDirectory(path);
-    } else if (stats.isFile()) {
-      return [path];
-    } 
-    return [];
-  }));
+  return [].concat(
+    ...fs.readdirSync(dir).map(name => {
+      const path = dir + "/" + name;
+      const stats = fs.statSync(path);
+      if (stats.isDirectory()) {
+        return getFilesInDirectory(path);
+      } else if (stats.isFile()) {
+        return [path];
+      }
+      return [];
+    })
+  );
 }
 
-app.get("/docs", function (request, response) {
+app.get("/docs", function(request, response) {
   response.header("Cache-Control", "max-age=0");
   const files = {};
-  getFilesInDirectory('docs').sort().forEach(path => {
-    const fileName = path.replace(/docs\/(.*)\.md/, '$1'); //trim off "docs/" and ".md"
-    files[fileName] = fs.readFileSync(path, 'utf8');
-  });
+  getFilesInDirectory("docs")
+    .sort()
+    .forEach(path => {
+      const fileName = path.replace(/docs\/(.*)\.md/, "$1"); //trim off "docs/" and ".md"
+      files[fileName] = fs.readFileSync(path, "utf8");
+    });
   response.send(files);
 });
 
 // http://expressjs.com/en/starter/basic-routing.html
-app.get("/", function (request, response) {
-  response.sendFile(__dirname + '/views/index.html');
+app.get("/", function(request, response) {
+  response.sendFile(__dirname + "/views/index.html");
 });
 
-app.get("/offline", function (request, response) {
-  response.sendFile(__dirname + '/views/offline.html');
+app.get("/offline", function(request, response) {
+  response.sendFile(__dirname + "/views/offline.html");
 });
 
-app.get("/manifest.json", function (request, response) {
-  response.sendFile(__dirname + '/views/manifest.json');
+app.get("/manifest.json", function(request, response) {
+  response.sendFile(__dirname + "/views/manifest.json");
 });
 
-app.get("*", function (request, response) {
-  response.sendFile(__dirname + '/views/404.html');
+app.get("*", function(request, response) {
+  response.sendFile(__dirname + "/views/404.html");
 });
 
 // listen for requests :)
 var listener = app.listen(port, () => {
-  console.log(`Your Telegram bot and Express server is listening on ${url}:${port}`);
+  console.log(
+    `Your Telegram bot and Express server is listening on ${url}:${port}`
+  );
 });
-
-
 
 // Remove the code below for local deployments and deployments outside Glitch.com
 process.on("SIGTERM", function() {
@@ -104,4 +108,21 @@ process.on("SIGTERM", function() {
       "/optional/path/here",
     process.exit
   );
+});
+
+//
+bot.onText(/\/start (.+)/, (msg, match) => {
+  // 'msg' is the received Message from Telegram
+  // 'match' is the result of executing the regexp above on the text content
+  // of the message
+
+  const chatId = msg.chat.id;
+  const resp = match[1]; // the captured "whatever"
+
+  if (match[1] = gitlab) {
+  } else {
+    bot.sendMessage(chatId, "Welcome to *Recap Time* bot!", {
+      parse_mode: "Markdown"
+    });
+  }
 });
