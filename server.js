@@ -89,8 +89,8 @@ app.get("*", function (request, response) {
 });
 
 // listen for requests :)
-var listener = app.listen(process.env.PORT, function () {
-  console.log('Your ' + listener.address().port);
+var listener = app.listen(port, () => {
+  console.log(`Your Telegram bot and Express server is listening on ${url}:${port}`);
 });
 
 
