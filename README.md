@@ -1,7 +1,7 @@
 Recap Time Node.js Telegram Bot
 ===========
 
-The Telegram bot for our [Recap Time bot](https://t.me/)
+The Telegram bot for our [Recap Time bot](https://t.me/RecapTime_bot) is fully re-written in Node.js from strach. 
 
 ## Setup and Usage
 
@@ -35,4 +35,4 @@ export PORT=3000
 ### Deploy on Glitch.com
 1. [Remix the project](https://glitch.com/edit/#!/remix/handsome-sheet), copy contents from `.env.test` file.
 2. Edit the `server.js` as usual.
-3. It auto-deploys
+3. It auto-deploys as usual, no `npm start` needed.
