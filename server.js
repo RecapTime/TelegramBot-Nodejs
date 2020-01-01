@@ -13,6 +13,7 @@ const token = process.env.TGBOT_TOKEN;
 
 // Get url and port from env. The NOW_URL is reserved for Zeit Now deployments
 const url = process.env.APP_URL || process.env.NOW_URL;
+/
 const port = process.env.PORT || 443;
 
 // Start the bot

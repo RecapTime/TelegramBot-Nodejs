@@ -9,6 +9,11 @@ Links with a ![](https://cdn.glitch.com/f55866fa-2ded-48bc-aa22-2f7c25415551%2Fl
 
 ---
 
+## Getting Started
+* Working locally? [Check out this guide](!#/)
+
+---
+
 ## Editing the User Manual
 
 * This User Manual is made with Glitch: That means anyone can modify and customize their own copy. Ask our team for an invite.
