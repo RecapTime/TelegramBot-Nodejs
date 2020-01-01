@@ -1,6 +1,6 @@
 {
   "name": "Recap Time Telegram Bot Developer Guides for Node.js",
-  "short_name": "",
+  "short_name": "Recap Time TG Bot Source Docs",
   "start_url": ".",
   "display": "standalone",
   "background_color": "#fff",
@@ -8,9 +8,16 @@
   "description": "User manual for developing, forking and using the Recap Time's Telegram bot fully rewritten in Node.js",
   "dir": "ltr",
   "lang": "en-US",
-  "icons": [{
-    "src": "https://cdn.glitch.com/f55866fa-2ded-48bc-aa22-2f7c25415551%2Ffish-192.png?1536952467337",
-    "sizes": "192x192",
-    "type": "image/png"
-  }]
+  "icons": [
+    {
+      "src": "https://cdn.glitch.com/f55866fa-2ded-48bc-aa22-2f7c25415551%2Ffish-192.png?1536952467337",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://cdn.glitch.com/f55866fa-2ded-48bc-aa22-2f7c25415551%2Ffish-512.png?1536953024570",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
 }

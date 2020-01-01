@@ -13,8 +13,10 @@ const token = process.env.TGBOT_TOKEN;
 
 // Get url and port from env. The NOW_URL is reserved for Zeit Now deployments
 const url = process.env.APP_URL || process.env.NOW_URL;
-/
+// In case of Zeit Now, either use 443 or customize it.
 const port = process.env.PORT || 443;
+// For
+const GLITCH_PROJECT_SLUG = process.env.PROJECT_DOMAIN
 
 // Start the bot
 const bot = new TelegramBot(token);
@@ -100,16 +102,6 @@ var listener = app.listen(port, () => {
   );
 });
 
-// Remove the code below for local deployments and deployments outside Glitch.com
-process.on("SIGTERM", function() {
-  console.log("SIGTERM received, sending SOS to Resurrect...");
-  require("https").get(
-    "https://resurrect.glitch.me/" +
-      process.env.PROJECT_DOMAIN +
-      "/optional/path/here",
-    process.exit
-  );
-});
 
 //
 bot.onText(/\/start (.+)/, (msg, match) => {
@@ -126,4 +118,16 @@ bot.onText(/\/start (.+)/, (msg, match) => {
       parse_mode: "Markdown"
     });
   }
+});
+
+// Remove the code below for local deployments and deployments outside Glitch.com
+// It's better to get your own copy of this project.
+process.on("SIGTERM", function() {
+  console.log("SIGTERM received, sending SOS to Resurrect...");
+  require("https").get(
+    "https://resurrect.glitch.me/" +
+       GLITCH_PROJECT_SLUG +
+      "/optional/path/here",
+    process.exit
+  );
 });
