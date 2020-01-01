@@ -112,14 +112,17 @@ var listener = app.listen(port, () => {
 
 
 //
-bot.onText(/\/start (.+)/, (msg, match) => {
+
+// Matches "/echo [whatever]"
+bot.onText(/\/start/, (msg) => {
   // 'msg' is the received Message from Telegram
   // 'match' is the result of executing the regexp above on the text content
   // of the message
 
   const chatId = msg.chat.id;
-    bot.sendMessage(chatId, "Welcome to *Recap Time* bot!", {
-      parse_mode: "Markdown"
+
+  // send back the matched "whatever" to the chat
+  bot.sendMessage(chatId, "Welcome to **Recap Time** bot!", {parse_mode: "MarkdownV2"});
 });
 
 // Remove the code below for local deployments and deployments outside Glitch.com
