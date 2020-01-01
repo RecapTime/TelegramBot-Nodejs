@@ -87,13 +87,11 @@ app.use(function (err, req, res, next) {
   res.status(500).send('Something broke!')
 })
 
-// listen for requests :)
-var listener = app.listen(port, () => {
-  console.log(
-    `Your Telegram bot and Express server is listening on ${url}:${port}`
-  );
-});
 
+// Start Express Server
+app.listen(port, () => {
+  console.log(`Express server is listening on ${port}`);
+});
 
 //
 
