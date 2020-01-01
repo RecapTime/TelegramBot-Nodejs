@@ -33,21 +33,6 @@ app.post(`/webhook/tgbot-${token}`, (req, res) => {
   res.sendStatus(200);
 });
 
-// Redirect remote files to secure side
-function checkHttps(req, res, next) {
-  // protocol check, if http, redirect to https
-
-  if (req.get("X-Forwarded-Proto").indexOf("https") != -1) {
-    //console.log("https, yo")
-    return next();
-  } else {
-    //console.log("just http")
-    res.redirect("https://" + req.hostname + req.url);
-  }
-}
-
-app.all("*", checkHttps);
-
 // Documentation Files
 app.use(express.static("public"));
 
@@ -67,7 +52,6 @@ function getFilesInDirectory(dir) {
 }
 
 app.get("/docs", function(request, response) {
-  response.header("Cache-Control", "max-age=0");
   const files = {};
   getFilesInDirectory("docs")
     .sort()
@@ -122,7 +106,9 @@ bot.onText(/\/start/, (msg) => {
   const chatId = msg.chat.id;
 
   // send back the matched "whatever" to the chat
-  bot.sendMessage(chatId, "Welcome to **Recap Time** bot!", {parse_mode: "MarkdownV2"});
+  bot.sendMessage(chatId, "Welcome to **Recap Time** bot\!", {parse_mode: "MarkdownV2", "reply_markup": {
+    "keyboard": [["Explore", "My Account"],   ["About bot"], ["Send feedback"]]
+    }});
 });
 
 // Remove the code below for local deployments and deployments outside Glitch.com
