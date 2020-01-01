@@ -118,14 +118,8 @@ bot.onText(/\/start (.+)/, (msg, match) => {
   // of the message
 
   const chatId = msg.chat.id;
-  const resp = match[1]; // the captured "whatever"
-
-  if (match[1] = gitlab) {
-  } else {
     bot.sendMessage(chatId, "Welcome to *Recap Time* bot!", {
       parse_mode: "Markdown"
-    });
-  }
 });
 
 // Remove the code below for local deployments and deployments outside Glitch.com
