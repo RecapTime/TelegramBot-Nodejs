@@ -91,9 +91,13 @@ app.get("/manifest.json", function(request, response) {
   response.sendFile(__dirname + "/views/manifest.json");
 });
 
-app.get("*", function(request, response) {
-  response.sendFile(__dirname + "/views/404.html");
-});
+// Handle 404 errors
+app.use(function (req, res, next) {
+  res.status(404).send("Sorry can't find that!")
+  res.sendFile(__dirname + "/views/404.html")
+})
+
+
 
 // listen for requests :)
 var listener = app.listen(port, () => {
