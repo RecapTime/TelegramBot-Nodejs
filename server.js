@@ -97,7 +97,11 @@ app.use(function (req, res, next) {
   res.sendFile(__dirname + "/views/404.html")
 })
 
-
+// Handle 500 errors
+app.use(function (err, req, res, next) {
+  console.error(err.stack)
+  res.status(500).send('Something broke!')
+})
 
 // listen for requests :)
 var listener = app.listen(port, () => {
