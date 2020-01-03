@@ -126,10 +126,10 @@ bot.onText(/\/contribute/, msg => {
   const chatId = msg.chat.id;
 
   // send back the matched "whatever" to the chat
-  bot.sendMessage(chatId, "*We are open for contributions!*" + "\n\n", {
+  bot.sendMessage(chatId, "*We are open for contributions*" + "\n\n" + "If you want to", {
     parse_mode: "MarkdownV2",
     reply_markup: {
-      keyboard: [["Explore", "My Account"], ["About bot"], ["Send feedback"]]
+      keyboard: [["Back to main menu"]]
     }
   });
 });
