@@ -107,7 +107,7 @@ bot.onText(/\/start/, (msg) => {
   const chatId = msg.chat.id;
 
   // send back the matched "whatever" to the chat
-  bot.sendMessage(chatId, "Welcome to **Recap Time** bot!\", {parse_mode: "MarkdownV2", "reply_markup": {
+  bot.sendMessage(chatId, "Welcome to **Recap Time** bot!\r" + "\n\n" + "\* Explore the bot", {parse_mode: "MarkdownV2", "reply_markup": {
     "keyboard": [["Explore", "My Account"],   ["About bot"], ["Send feedback"]]
     }});
 });
@@ -115,7 +115,7 @@ bot.onText(/\/start/, (msg) => {
 // Remove the code below for local deployments and deployments outside Glitch.com
 // It's better to get your own copy of this project.
 process.on("SIGTERM", function() {
-  console.log("SIGTERM received, sending SOS to Resurrect...");
+  console.log("SIGTERM received, sending SOS to Resurrect... [Issued on: " + Date.now() + "]");
   require("https").get(
     "https://resurrect.glitch.me/" +
        GLITCH_PROJECT_SLUG +
