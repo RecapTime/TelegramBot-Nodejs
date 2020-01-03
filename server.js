@@ -16,14 +16,14 @@ const url = process.env.APP_URL || process.env.NOW_URL;
 // In case of Zeit Now, either use 443 or customize it.
 const port = process.env.PORT || 443;
 // For
-const GLITCH_PROJECT_SLUG = process.env.PROJECT_DOMAIN
+const GLITCH_PROJECT_SLUG = process.env.PROJECT_DOMAIN;
 
 // Start the bot
 const bot = new TelegramBot(token);
 
 // Get the channel ID of your bot status channel
 // See the docs for details
-const statusChannel = 74903294
+const statusChannel = 74903294;
 
 // This informs the Telegram servers of the new webhook.
 bot.setWebHook(`${url}/webhook/tgbot-${token}`);
@@ -80,16 +80,15 @@ app.get("/manifest.json", function(request, response) {
 });
 
 // Handle 404 errors
-app.use(function (req, res, next) {
-  res.status(404).sendFile(__dirname + "/views/404.html")
-})
+app.use(function(req, res, next) {
+  res.status(404).sendFile(__dirname + "/views/404.html");
+});
 
 // Handle 500 errors
-app.use(function (err, req, res, next) {
-  console.error(err.stack)
-  res.status(500).send('Something broke!')
-})
-
+app.use(function(err, req, res, next) {
+  console.error(err.stack);
+  res.status(500).send("Something broke!");
+});
 
 // Start Express Server
 app.listen(port, () => {
@@ -99,7 +98,7 @@ app.listen(port, () => {
 //
 
 // Matches "/echo [whatever]"
-bot.onText(/\/start/, (msg) => {
+bot.onText(/\/start/, msg => {
   // 'msg' is the received Message from Telegram
   // 'match' is the result of executing the regexp above on the text content
   // of the message
@@ -107,18 +106,45 @@ bot.onText(/\/start/, (msg) => {
   const chatId = msg.chat.id;
 
   // send back the matched "whatever" to the chat
-  bot.sendMessage(chatId, "Welcome to **Recap Time** bot!\r" + "\n\n" + "\* Explore the bot", {parse_mode: "MarkdownV2", "reply_markup": {
-    "keyboard": [["Explore", "My Account"],   ["About bot"], ["Send feedback"]]
-    }});
+  bot.sendMessage(
+    chatId,
+    "Welcome to *Recap Time* bot!" + "\n\n" + "* Explore the bot",
+    {
+      parse_mode: "MarkdownV2",
+      reply_markup: {
+        keyboard: [["Explore", "My Account"], ["About bot"], ["Send feedback"]]
+      }
+    }
+  );
+});
+
+bot.onText(/\/contribute/, msg => {
+  // 'msg' is the received Message from Telegram
+  // 'match' is the result of executing the regexp above on the text content
+  // of the message
+
+  const chatId = msg.chat.id;
+
+  // send back the matched "whatever" to the chat
+  bot.sendMessage(chatId, "*We are open for contributions!*" + "\n\n", {
+    parse_mode: "MarkdownV2",
+    reply_markup: {
+      keyboard: [["Explore", "My Account"], ["About bot"], ["Send feedback"]]
+    }
+  });
 });
 
 // Remove the code below for local deployments and deployments outside Glitch.com
 // It's better to get your own copy of this project.
 process.on("SIGTERM", function() {
-  console.log("SIGTERM received, sending SOS to Resurrect... [Issued on: " + Date.now() + "]");
+  console.log(
+    "SIGTERM received, sending SOS to Resurrect... [Issued on: " +
+      Date.now() +
+      "]"
+  );
   require("https").get(
     "https://resurrect.glitch.me/" +
-       GLITCH_PROJECT_SLUG +
+      GLITCH_PROJECT_SLUG +
       "/optional/path/here",
     process.exit
   );
