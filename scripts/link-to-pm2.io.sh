@@ -8,4 +8,10 @@
 ## - TERRORISER_TOKEN2: and, this is your PM2 Plus bucket public key
 
 ## Link it
-pm2 link $TERRORISER_TOKEN1 $TERRORISER_TOKEN2
+pm2 link $TERRORISER_TOKEN1 $TERRORISER_TOKEN2 $MACHINE_NAME
+
+## IF you have any configurtion changes, reload.
+pm2 update
+
+## Then run it
+pm2 start

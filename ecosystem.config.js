@@ -1,7 +1,7 @@
 module.exports = {
   apps : [{
-    name: 'API',
-    script: 'app.js',
+    name: 'TELEGRAM_BOT_SERVER',
+    script: 'server.js',
 
     // Options reference: https://pm2.keymetrics.io/docs/usage/application-declaration/
     args: 'one two',
@@ -13,18 +13,20 @@ module.exports = {
       NODE_ENV: 'development'
     },
     env_production: {
-      NODE_ENV: 'production'
-      
+      NODE_ENV: 'production',
+      TGBOT_TOKEN: 'yourtokenhere'
     }
   }],
 
   deploy : {
     production : {
       user : 'node',
+      // Change the host Ip address
       host : '212.83.163.1',
       ref  : 'origin/master',
-      repo : 'git@github.com:repo.git',
+      repo : 'git@gitlab.com:MadeByThePinsTeam-DevLabs/RecapTime-Staff/recaptime-tgbot-nodejs.git',
       path : '/var/www/production',
+      "pre-deploy": 'git push',
       'post-deploy' : 'npm install && pm2 reload ecosystem.config.js --env production'
     }
   }
