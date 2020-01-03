@@ -21,6 +21,10 @@ const GLITCH_PROJECT_SLUG = process.env.PROJECT_DOMAIN
 // Start the bot
 const bot = new TelegramBot(token);
 
+// Get the channel ID of your bot status channel
+// See the docs for details
+const statusChannel = 74903294
+
 // This informs the Telegram servers of the new webhook.
 bot.setWebHook(`${url}/webhook/tgbot-${token}`);
 
@@ -77,8 +81,7 @@ app.get("/manifest.json", function(request, response) {
 
 // Handle 404 errors
 app.use(function (req, res, next) {
-  res.status(404).send("Sorry can't find that!")
-  res.sendFile(__dirname + "/views/404.html")
+  res.status(404).sendFile(__dirname + "/views/404.html")
 })
 
 // Handle 500 errors
@@ -104,7 +107,7 @@ bot.onText(/\/start/, (msg) => {
   const chatId = msg.chat.id;
 
   // send back the matched "whatever" to the chat
-  bot.sendMessage(chatId, "Welcome to **Recap Time** bot\!", {parse_mode: "MarkdownV2", "reply_markup": {
+  bot.sendMessage(chatId, "Welcome to **Recap Time** bot!\", {parse_mode: "MarkdownV2", "reply_markup": {
     "keyboard": [["Explore", "My Account"],   ["About bot"], ["Send feedback"]]
     }});
 });
