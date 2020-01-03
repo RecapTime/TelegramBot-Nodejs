@@ -18,6 +18,7 @@ const port = process.env.PORT || 443;
 // For
 const GLITCH_PROJECT_SLUG = process.env.PROJECT_DOMAIN;
 
+
 // Start the bot
 const bot = new TelegramBot(token);
 
@@ -81,7 +82,7 @@ app.get("/manifest.json", function(request, response) {
 
 // Handle 404 errors
 app.use(function(req, res, next) {
-  res.status(404).sendFile(__dirname + "/views/404.html");
+  res.status(404).json({ "error": 404});
 });
 
 // Handle 500 errors

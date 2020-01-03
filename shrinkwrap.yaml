@@ -2,6 +2,7 @@ dependencies:
   body-parser: 1.19.0
   express: 4.17.1
   markdown-it: 10.0.0
+  markdown-it-github-headings: 1.1.2
   node-telegram-bot-api: 0.30.0
   node-telegram-keyboard-wrapper: 2.0.1
   node-telegram-operation-manager: 1.2.0
@@ -572,6 +573,10 @@ packages:
     dev: false
     resolution:
       integrity: sha512-Bt1sBAGFHY9DKY+4/2cV6izcKJUf5T7/gkdmkxzX/qv9CcGH8xSwVRW5mtX03SWJtRTWSOpzCuWN9rBFYZepZQ==
+  /emoji-regex/6.1.1:
+    dev: false
+    resolution:
+      integrity: sha1-xs0OwbBkLio8Z6ETfvxeeW2k+I4=
   /encodeurl/1.0.2:
     dev: false
     engines:
@@ -887,6 +892,12 @@ packages:
     dev: false
     resolution:
       integrity: sha1-WZrBkrcYdYJeE6RF86bgURjC90U=
+  /github-slugger/1.2.1:
+    dependencies:
+      emoji-regex: 6.1.1
+    dev: false
+    resolution:
+      integrity: sha512-SsZUjg/P03KPzQBt7OxJPasGw6NRO5uOgiZ5RGXVud5iSIZ0eNZeNp5rTwCxtavrRUa/A77j8mePVc5lEvk0KQ==
   /glob-parent/5.1.0:
     dependencies:
       is-glob: 4.0.1
@@ -949,6 +960,12 @@ packages:
       node: '>= 0.4.0'
     resolution:
       integrity: sha512-f2dvO0VU6Oej7RkWJGrehjbzMAjFp5/VKPp5tTpWIV4JHHZK1/BxbFRtf/siA2SWTe09caDmVtYYzWEIbBS4zw==
+  /html-entities/1.2.1:
+    dev: false
+    engines:
+      '0': node >= 0.4.0
+    resolution:
+      integrity: sha1-DfKTUfByEWNRXfueVUPl9u7VFi8=
   /http-errors/1.7.2:
     dependencies:
       depd: 1.1.2
@@ -1029,6 +1046,12 @@ packages:
     dev: false
     resolution:
       integrity: sha512-RZY5huIKCMRWDUqZlEi72f/lmXKMvuszcMBduliQ3nnWbx9X/ZBQO7DijMEYS9EhHBb2qacRUMtC7svLwe0lcw==
+  /innertext/1.0.3:
+    dependencies:
+      html-entities: 1.2.1
+    dev: false
+    resolution:
+      integrity: sha512-ZC410b7IbrTrmt8bQb27xUOJgXkJu+XL6MVncb9FGyxjRIHyQqNjpSDY20zvSUttkAiYj0dait/67/sXyWvwYg==
   /interpret/1.2.0:
     dev: false
     engines:
@@ -1216,6 +1239,13 @@ packages:
     dev: false
     resolution:
       integrity: sha512-KpNARQA3Iwv+jTA0utUVVbrh+Jlrr1Fv0e56GGzAFOXN7dk/FviaDW8LHmK52DlcH4WP2n6gI8vN1aesBFgo9w==
+  /markdown-it-github-headings/1.1.2:
+    dependencies:
+      github-slugger: 1.2.1
+      innertext: 1.0.3
+    dev: false
+    resolution:
+      integrity: sha512-8haIwpAx87DQHcEtzkfsWv2hxg4jOvow6/nJKAMQ2wYRMZQTIfJm9VzrDkqw72Bb4YXBmI0u3GA/3MdXVL/x5g==
   /markdown-it/10.0.0:
     dependencies:
       argparse: 1.0.10
@@ -2200,6 +2230,7 @@ specifiers:
   body-parser: ^1.19.0
   express: ^4.17.1
   markdown-it: ^10.0.0
+  markdown-it-github-headings: ^1.1.2
   node-telegram-bot-api: ^0.30.0
   node-telegram-keyboard-wrapper: ^2.0.1
   node-telegram-operation-manager: ^1.2.0
