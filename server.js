@@ -87,7 +87,7 @@ app.use(function(req, res, next) {
 // Handle 500 errors
 app.use(function(err, req, res, next) {
   console.error(err.stack);
-  res.status(500).send("Something broke!");
+  res.status(500).json({ "issue": "Something went berserk. Contact Support or check your code." });
 });
 
 // Start Express Server

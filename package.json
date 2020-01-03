@@ -16,7 +16,8 @@
     "express": "^4.17.1",
     "node-telegram-bot-api": "^0.30.0",
     "node-telegram-keyboard-wrapper": "^2.0.1",
-    "node-telegram-operation-manager": "^1.2.0"
+    "node-telegram-operation-manager": "^1.2.0",
+    "pm2": "^4.2.1"
   },
   "engines": {
     "node": "12.x"
