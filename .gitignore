@@ -104,3 +104,9 @@ dist
 
 # Stores VSCode versions used for testing VSCode extensions
 .vscode-test
+
+## Exclude Glitch assets files
+.glitch-assets
+
+## PM2 resources
+.pm2/

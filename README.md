@@ -37,3 +37,6 @@ export PORT=3000
 1. [Remix the project](https://glitch.com/edit/#!/remix/handsome-sheet), copy contents from `.env.test` file.
 2. Edit the `server.js` as usual.
 3. It auto-deploys as usual, no `npm start` needed.
+
+## Looking for docs?
+We've been moved our documentation into somewhere. Check them out soon.
