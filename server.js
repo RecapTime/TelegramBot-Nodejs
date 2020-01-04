@@ -1,12 +1,25 @@
 // init project
 const express = require("express");
 const app = express();
-const fs = require("fs");
 
-// Glitch Slug
+// Get project slug for Glitch and Heroku deployments, fallbacks to default if none
 const GLITCH_PROJECT_SLUG = process.PROJECT_DOMAIN || "handsome-sheet";
+const HEROKU_APP_URL = process.env.HEROKU_APP_NAME
+
+// By default, its fallback to
+const webhookReceiverUrl = "https://" + GLITCH_PROJECT_SLUG + ".glitch.me" || process.env.APP_URL || process.env.NOW_URL || "https"
 
 app.get("/", (req, res) => res.send({ status: 200, "description": "Hello world! The service is currently running."}));
+
+app.use(function (err, req, res, next) {
+  console.error(err.stack)
+  res.status(500).send({status: 500, desciption: 'Something went berserk. Either check the code, consult the docs or contact Support'})
+})
+
+app.use(function (err, req, res, next) {
+  console.error(err.stack)
+  res.status(404).send({status: 404, desciption: 'Whoops! That didn\'t found on our side.'})
+})
 
 var listener = app.listen(process.env.PORT, function() {
   console.log(
