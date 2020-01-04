@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Recap Time Telegram Bot Source Docs</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta
+      name="description"
+      content="A simple Node app built on Express, instantly up and running."
+    />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <link rel="stylesheet" href="//unpkg.com/docsify/lib/themes/vue.css" />
+    <style>
+      nav.app-nav li ul {
+        min-width: 100px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="app"></div>
+    <script>
+      window.$docsify = {
+        alias: {
+          "/.*/_navbar.md": "/_navbar.md"
+        },
+        auto2top: true,
+        basePath: "/docs/",
+        coverpage: true,
+        executeScript: true,
+        loadSidebar: true,
+        loadNavbar: true,
+        mergeNavbar: true,
+        maxLevel: 4,
+        subMaxLevel: 2,
+        name: "docsify",
+        search: {
+          noData: {
+            "/": "Nothing to see here, accept our apologies"
+          },
+          paths: "auto",
+          placeholder: {
+            "/": "Search"
+          }
+        },
+        formatUpdated: "{MM}/{DD} {HH}:{mm}",
+        plugins: [
+          function(hook, vm) {
+            hook.beforeEach(function(html) {
+              if (/gitlab\.com/.test(vm.route.file)) {
+                url = vm.route.file
+                  .replace("gitlab.com")
+                  .replace(/\/master/, "/blob/master");
+              } else {
+                url =
+                  "https://gitlab.com/MadeByThePinsTeam-DevLabs/RecapTime-Staff/recaptime-tgbot-nodejs/blob/master/" +
+                  vm.route.file;
+              }
+              var editHtml = "[:memo: Edit Document](" + url + ")\n";
+              return (
+                editHtml +
+                html +
+                "\n\n----\n\n" +
+                '<a href="https://docsify.js.org" target="_blank" style="color: inherit; font-weight: normal; text-decoration: none;">Powered by docsify</a>'
+              );
+            });
+          }
+        ]
+      };
+    </script>
+    <script src="/lib/docsify.js"></script>
+    <script src="/lib/plugins/search.js"></script>
+    <script src="//unpkg.com/prismjs/components/prism-bash.min.js"></script>
+    <script src="//unpkg.com/prismjs/components/prism-markdown.min.js"></script>
+    <script src="//unpkg.com/prismjs/components/prism-nginx.min.js"></script>
+  </body>
+</html>
