@@ -6,9 +6,7 @@ const fs = require("fs");
 // Glitch Slug
 const GLITCH_PROJECT_SLUG = process.PROJECT_DOMAIN || "handsome-sheet";
 
-app.get("/", (req, res) => res.sendFile(__dirname + "/index.html"));
-
-app.get("/docs", (req, res) => res.sendFile(__dirname + "/docs/index.html"));
+app.get("/", (req, res) => res.send({ status: 200, "description": "Hello world! The service is currently running."}));
 
 var listener = app.listen(process.env.PORT, function() {
   console.log(
