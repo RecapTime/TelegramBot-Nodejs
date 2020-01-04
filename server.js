@@ -1,13 +1,18 @@
 // init project
-const express = require("express");
-const app = express();
+
+const Telegraf = require('telegraf')
+const express = require('express')
+
+const bot = new Telegraf(process.env.BOT_TOKEN)
 
 // Get project slug for Glitch and Heroku deployments, fallbacks to default if none
 const GLITCH_PROJECT_SLUG = process.PROJECT_DOMAIN || "handsome-sheet";
 const HEROKU_APP_URL = process.env.HEROKU_APP_NAME
 
 // By default, its fallback to
-const webhookReceiverUrl = "https://" + GLITCH_PROJECT_SLUG + ".glitch.me" || process.env.APP_URL || process.env.NOW_URL || "https"
+const webhookReceiverUrl = "https://" + GLITCH_PROJECT_SLUG + ".glitch.me" || process.env.APP_URL || process.env.NOW_URL || "https://" + HEROKU_APP_URL + ".herokuapp.com"
+
+const app = express();
 
 app.get("/", (req, res) => res.send({ status: 200, "description": "Hello world! The service is currently running."}));
 
