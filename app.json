@@ -1,0 +1,13 @@
+{
+  "name": "Recap Time NodeJS Telegram Bot",
+  "description": "Open-sourced Recap Time bot fully rewritten in Node.js",
+  "logo": "https://telegra.ph/file/6ce444f5ba54d79fb8622.jpg",
+  "keywords": [
+    "nodejs",
+    "glitch",
+    "telegram"
+  ],
+  "repository": "https://gitlab.com/SpEcHiDe/UniBorg",
+  "website": "https://telegram.dog/UniBorg",
+  "success_url": "https://t.me/UniBorg/5"
+}
