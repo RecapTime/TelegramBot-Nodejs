@@ -1,7 +1,7 @@
 {
   "version": "2",
   "name": "recaptime-tgbot-nodejs",
-  "alias": ["telegram-bot.recaptime.tk", "recaptime-tgbot"],
+  "alias": ["recaptime-tgbot"],
   "env": {
     "PORT": "443",
     "NODE_ENV": "production"
