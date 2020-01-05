@@ -1,7 +1,6 @@
 {
   "name": "Recap Time NodeJS Telegram Bot",
   "description": "Open-sourced Recap Time bot fully rewritten in Node.js",
-  "logo": "https://telegra.ph/file/6ce444f5ba54d79fb8622.jpg",
   "keywords": [
     "nodejs",
     "glitch",
@@ -9,5 +8,20 @@
   ],
   "repository": "https://gitlab.com/SpEcHiDe/UniBorg",
   "website": "https://telegram.dog/UniBorg",
-  "success_url": "https://t.me/UniBorg/5"
+  "success_url": "https://t.me/UniBorg/5",
+  "image": 'heroku/node',
+  "env": {
+    "ENV": {
+      "description": "Setting this to ANYTHING will enable environment variables.",
+      "value": "ANYTHING"
+    },
+    "APP_ID": {
+      "description": "Get this value from my.telegram.org! Please do not steal",
+      "value": ""
+    },
+    "PORT": {
+      "description": "Set the port to the supported ones by Telegram for webhooks.",
+      "value": ""
+    }
+  }
 }
