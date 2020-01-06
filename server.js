@@ -30,6 +30,7 @@ const webhookReceiverUrl =
     HEROKU_APP_URL +
     ".herokuapp.com/telegram/endpoints/${BOT_TOKEN}";
 
+// Pull the token to get started.
 const bot = new Telegraf(BOT_TOKEN);
 
 mongo.connect(data.mongoLink, {useNewUrlParser: true}, (err, client) => {
@@ -37,7 +38,7 @@ mongo.connect(data.mongoLink, {useNewUrlParser: true}, (err, client) => {
     sendError(err)
   }
 
-  db = client.db('recaptime_tgbotdb')
+  const db = client.db('recaptime_tgbotdb')
   mongo.connect(data.mongoLink, {useNewUrlParser: true}, (err, client) => {
   
   bot.telegram.setWebhook(webhookReceiverUrl)
