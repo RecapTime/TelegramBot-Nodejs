@@ -1,5 +1,5 @@
 {
-  "name": "Recap Time NodeJS Telegram Bot",
+  "name": "Recap ",
   "description": "Open-sourced Recap Time bot fully rewritten in Node.js",
   "keywords": [
     "nodejs",
@@ -8,8 +8,12 @@
   ],
   "repository": "https://gitlab.com/SpEcHiDe/UniBorg",
   "website": "https://telegram.dog/UniBorg",
-  "success_url": "https://t.me/UniBorg/5",
-  "image": 'heroku/node',
+  "success_url": "/sucess",
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    }
+  ],
   "env": {
     "ENV": {
       "description": "Setting this to ANYTHING will enable environment variables.",

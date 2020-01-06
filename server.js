@@ -36,6 +36,9 @@ app.get("/", (req, res) =>
 
 app.use(bot.webhookCallback("/telegram/endpoints/${BOT_TOKEN}"));
 
+app.get("/thank-you", (req, res) => 
+       res.sendFile(__dirname + "/views/thankyou.html"))
+
 app.use(function(err, req, res, next) {
   console.error(err.stack);
   res
@@ -53,7 +56,7 @@ app.use(function(err, req, res, next) {
     .status(404)
     .send({
       status: 404,
-      desciption: "Whoops! That didn't found on our side."
+      desciption: "Whoops! That didn't found on our side. Check the url or change some code."
     });
 });
 
