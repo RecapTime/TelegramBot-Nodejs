@@ -32,27 +32,36 @@ const webhookReceiverUrl =
 
 const bot = new Telegraf(BOT_TOKEN);
 
-bot.telegram.setWebhook(webhookReceiverUrl);
+mongo.connect(data.mongoLink, {useNewUrlParser: true}, (err, client) => {
+  if (err) {
+    sendError(err)
+  }
+
+  db = client.db('recaptime_tgbotdb')
+  mongo.connect(data.mongoLink, {useNewUrlParser: true}, (err, client) => {
+  
+  bot.telegram.setWebhook(webhookReceierUrl)
+});
 
 bot.start((ctx) => {
   starter(ctx)
-})
+});
 
 bot.hears('📁 Source code', (ctx) => {
   ctx.reply(
     'You can see code of this bot on GitHub. Thanks for stars!', 
     { reply_markup: { inline_keyboard: [[{text: '🔗 GitHub', url: 'https://github.com/Khuzha/oneqrbot'}]] } }
   )
-})
+});
 
 function starter (ctx) {
   ctx.reply(
     'Hi! What do you want to do?', 
-    { reply_markup: { keyboard: [['🔍 Scan QR Code'], ['🖊 Generate QR Code'], ['🔍 Scan Barcode'], ['📈 Statistic', '📁 Source code']], resize_keyboard: true } }
+    { reply_markup: { keyboard: [['Explore features'], ['My Account'], ['Bot Settings'], ['📈 Statistic', '📁 Source code']], resize_keyboard: true } }
   )
 
   updateUser(ctx, true)
-}
+};
 
 function updateUser (ctx, active) {
   let jetzt = active ? 'active' : 'blocked'
