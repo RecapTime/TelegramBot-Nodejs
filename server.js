@@ -33,6 +33,7 @@ const webhookReceiverUrl =
 // Pull the token to get started.
 const bot = new Telegraf(BOT_TOKEN);
 
+// We are using MongoDB for data
 mongo.connect(data.mongoLink, {useNewUrlParser: true}, (err, client) => {
   if (err) {
     sendError(err)
@@ -47,7 +48,9 @@ mongo.connect(data.mongoLink, {useNewUrlParser: true}, (err, client) => {
 bot.use(session())
 bot.use(stage.middleware())
 
+const authWithTGPassport = new Scene
 
+  
 const app = express();
 
 app.get("/", (req, res) =>
