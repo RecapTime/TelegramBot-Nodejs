@@ -1,13 +1,11 @@
 module.exports = {
   apps : [{
-    name: 'Telegram Bot Server',
-    script: 'app.js',
-
-    // Options reference: https://pm2.keymetrics.io/docs/usage/application-declaration/
+    name: 'Telegram Bot Server - Production',
+    script: 'server.js',
     args: 'one two',
     instances: 1,
     autorestart: true,
-    watch: false,
+    watch: true,
     max_memory_restart: '512M',
     env: {
       NODE_ENV: 'development'
