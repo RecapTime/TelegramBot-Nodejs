@@ -85,6 +85,18 @@ var listener = app.listen(process.env.PORT, function() {
     "Your Express app is listening on port " + listener.address().port
   );
 });
+  
+function updateUser (ctx, active) {
+  let jetzt = active ? 'active' : 'blocked'
+  db.collection('allUsers').updateOne({userId: ctx.from.id}, {$set: {status: jetzt}}, {upsert: true, new: true})
+}
+  
+function sendError (err, ctx) {
+  if (err.toString().includes('message is not modified')) {
+    return
+  }
+  bot.telegram.sendMessage(data.dev, `Ошибка у [${ctx.from.first_name}](tg://user?id=${ctx.from.id}) \n\nОшибка: ${err}`, { parse_mode: 'markdown' })
+}
 
 // Remove the code below for local deployments and deployments outside Glitch.com
 // It's better to get your own copy of this project.
