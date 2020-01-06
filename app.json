@@ -1,12 +1,12 @@
 {
-  "name": "Recap ",
+  "name": "Recap Time TG Bot Nodejs Source",
   "description": "Open-sourced Recap Time bot fully rewritten in Node.js",
   "keywords": [
     "nodejs",
     "glitch",
     "telegram"
   ],
-  "repository": "https://gitlab.com/SpEcHiDe/UniBorg",
+  "repository": "https://gitlab.com/MadeByThePinsTeam-DevLabs/RecapTime-Staff/recaptime-tgbot-nodejs",
   "website": "https://telegram.dog/UniBorg",
   "success_url": "/sucess",
   "buildpacks": [
@@ -19,12 +19,17 @@
       "description": "Setting this to ANYTHING will enable environment variables.",
       "value": "ANYTHING"
     },
-    "APP_ID": {
-      "description": "Get this value from my.telegram.org! Please do not steal",
-      "value": ""
+    "TGBOT_TOKEN": {
+      "description": "Get your Telegram bot token from BotFater. Please avoid using this dev token!",
+      "value": "",
+      "required": "true"
     },
     "PORT": {
       "description": "Set the port to the supported ones by Telegram for webhooks.",
+      "value": "449"
+    },
+    "PM2_PUBLIC_KEY": {
+      "description": "Required for using PM2. By default, you are using dev tokens provided by the team.",
       "value": ""
     }
   }
