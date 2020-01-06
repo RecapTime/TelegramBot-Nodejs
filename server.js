@@ -22,8 +22,17 @@ const webhookReceiverUrl =
     ".herokuapp.com/telegram/endpoints/${BOT_TOKEN}";
 
 const bot = new Telegraf(BOT_TOKEN);
+
 bot.telegram.setWebhook(webhookReceiverUrl);
+
 bot.command("start", ctx => ctx.reply("Welcome to the Recap Time bot!"));
+bot.hears('📁 Source code', (ctx) => {
+  ctx.reply(
+    'You can see code of this bot on GitHub. Thanks for stars!', 
+    { reply_markup: { inline_keyboard: [[{text: '🔗 GitHub', url: 'https://github.com/Khuzha/oneqrbot'}]] } }
+  )
+})
+
 
 const app = express();
 
