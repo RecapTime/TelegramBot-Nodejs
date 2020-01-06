@@ -29,8 +29,16 @@
       "value": "449"
     },
     "PM2_PUBLIC_KEY": {
-      "description": "Required for using PM2. By default, you are using dev tokens provided by the team.",
-      "value": ""
+      "description": "By default, you are using dev tokens provided by the team. Sign up on app.pm2.io, create an new bucket and get public keys.",
+      "value": "mudo0tyq72u0d4k"
+    },
+    "PM2_PRIVATE_KEY": {
+      "description": "By default, you are using dev tokens provided by the team. Sign up on app.pm2.io, create an new bucket and get private keys.",
+      "value": "333goq7o285dh03"
+    },
+    "PM2_MACHINE_NAME": {
+      "description": "",
+      "required": "false"
     }
   }
 }
