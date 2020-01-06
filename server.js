@@ -40,9 +40,11 @@ mongo.connect(data.mongoLink, {useNewUrlParser: true}, (err, client) => {
   db = client.db('recaptime_tgbotdb')
   mongo.connect(data.mongoLink, {useNewUrlParser: true}, (err, client) => {
   
-  bot.telegram.setWebhook(webhookReceierUrl)
+  bot.telegram.setWebhook(webhookReceiverUrl)
 });
 
+bot.use(session())
+bot.use(stage.middleware())
 
 
 const app = express();
