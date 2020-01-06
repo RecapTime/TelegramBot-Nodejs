@@ -2,6 +2,15 @@
 
 const Telegraf = require("telegraf");
 const express = require("express");
+const mongo = require('mongodb').MongoClient
+const axios = require('axios')
+const fs = require('fs')
+const data = require('./data')
+const session = require('telegraf/session')
+const Stage = require('telegraf/stage')
+const Scene = require('telegraf/scenes/base')
+const { leave } = Stage
+const stage = new Stage()
 
 // Get project slug for Glitch and Heroku deployments, fallbacks to default if none
 const GLITCH_PROJECT_SLUG = process.PROJECT_DOMAIN || "handsome-sheet";
@@ -25,7 +34,10 @@ const bot = new Telegraf(BOT_TOKEN);
 
 bot.telegram.setWebhook(webhookReceiverUrl);
 
-bot.command("start", ctx => ctx.reply("Welcome to the Recap Time bot!"));
+bot.start((ctx) => {
+  starter(ctx)
+})
+
 bot.hears('📁 Source code', (ctx) => {
   ctx.reply(
     'You can see code of this bot on GitHub. Thanks for stars!', 
@@ -33,6 +45,19 @@ bot.hears('📁 Source code', (ctx) => {
   )
 })
 
+function starter (ctx) {
+  ctx.reply(
+    'Hi! What do you want to do?', 
+    { reply_markup: { keyboard: [['🔍 Scan QR Code'], ['🖊 Generate QR Code'], ['🔍 Scan Barcode'], ['📈 Statistic', '📁 Source code']], resize_keyboard: true } }
+  )
+
+  updateUser(ctx, true)
+}
+
+function updateUser (ctx, active) {
+  let jetzt = active ? 'active' : 'blocked'
+  db.collection('allUsers').updateOne({userId: ctx.from.id}, {$set: {status: jetzt}}, {upsert: true, new: true})
+}
 
 const app = express();
 
