@@ -43,30 +43,7 @@ mongo.connect(data.mongoLink, {useNewUrlParser: true}, (err, client) => {
   bot.telegram.setWebhook(webhookReceierUrl)
 });
 
-bot.start((ctx) => {
-  starter(ctx)
-});
 
-bot.hears('📁 Source code', (ctx) => {
-  ctx.reply(
-    'You can see code of this bot on GitHub. Thanks for stars!', 
-    { reply_markup: { inline_keyboard: [[{text: '🔗 GitHub', url: 'https://github.com/Khuzha/oneqrbot'}]] } }
-  )
-});
-
-function starter (ctx) {
-  ctx.reply(
-    'Hi! What do you want to do?', 
-    { reply_markup: { keyboard: [['Explore features'], ['My Account'], ['Bot Settings'], ['📈 Statistic', '📁 Source code']], resize_keyboard: true } }
-  )
-
-  updateUser(ctx, true)
-};
-
-function updateUser (ctx, active) {
-  let jetzt = active ? 'active' : 'blocked'
-  db.collection('allUsers').updateOne({userId: ctx.from.id}, {$set: {status: jetzt}}, {upsert: true, new: true})
-}
 
 const app = express();
 
@@ -123,4 +100,5 @@ process.on("SIGTERM", function() {
       "/optional/path/here",
     process.exit
   );
+});
 });
