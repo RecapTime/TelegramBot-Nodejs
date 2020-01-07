@@ -101,7 +101,7 @@ function sendError (err, ctx) {
   if (err.toString().includes('message is not modified')) {
     return
   }
-  bot.telegram.sendMessage(data.dev, `Ошибка у [${ctx.from.first_name}](tg://user?id=${ctx.from.id}) \n\nОшибка: ${err}`, { parse_mode: 'markdown' })
+  bot.telegram.sendMessage(data.dev, `Someoe`, { parse_mode: 'markdown' })
 }
 
 // Remove the code below for local deployments and deployments outside Glitch.com

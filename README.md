@@ -10,7 +10,8 @@ If you want to contribute, please use [our GitLab mirror](https://gitlab.com/Mad
 ```shell
 $ git clone https://gitlab.com/MadeByThePinsTeam-DevLabs/RecapTime-Staff/recaptime-tgbot-nodejs.git
 ```
-- Copy the contents from `.env.test` to .env or export those variables manually by hand.
+- Copy the contents from `.env.sample` to .env or export those variables manually by hand.
+- Install dependencies first.
 
 ## Looking for docs?
 We've been moved our documentation into somewhere. Check them out soon.
