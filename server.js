@@ -2,15 +2,15 @@
 
 const Telegraf = require("telegraf");
 const express = require("express");
-const axios = require('axios')
-const fs = require('fs')
-const data = require('./data')
-const session = require('telegraf/session')
-const Stage = require('telegraf/stage')
-const Scene = require('telegraf/scenes/base')
-const { leave } = Stage
-const stage = new Stage()
-const {Extra, Markup} = Telegraf
+const axios = require("axios");
+const fs = require("fs");
+const data = require("./data");
+const session = require("telegraf/session");
+const Stage = require("telegraf/stage");
+const Scene = require("telegraf/scenes/base");
+const { leave } = Stage;
+const stage = new Stage();
+const { Extra, Markup } = Telegraf;
 
 // Get project slug for Glitch and Heroku deployments, fallbacks to default if none
 const GLITCH_PROJECT_SLUG = process.PROJECT_DOMAIN || "handsome-sheet";
@@ -33,28 +33,53 @@ const webhookReceiverUrl =
 // Pull the token to get started.
 const bot = new Telegraf(BOT_TOKEN);
 
+bot.use(session());
+bot.use(stage.middleware());
 
-bot.use(session())
-bot.use(stage.middleware())
-
-const getBotInfo = new Scene()
-getBotInfo.command('about', (ctx) => ctx.reply(""))
+const getBotInfo = new Scene();
+getBotInfo.command("about", ctx => ctx.reply(""));
 
 // Get bot information and print from console logs
-bot.telegram.getMe().then((bot_informations) => {
-    bot.options.username = bot_informations.username;
-    console.log("The webhook endpoint is ready to deploy. Your Telegram bot username is "+bot_informations.username);
+bot.telegram.getMe().then(bot_informations => {
+  bot.options.username = bot_informations.username;
+  console.log(
+    "The webhook endpoint is ready to deploy. Your Telegram bot username is " +
+      bot_informations.username
+  );
 });
 
-bot.on('inline_query', async ({ inlineQuery, answerInlineQuery }) => {
+bot.on("inline_query", async ({ inlineQuery, answerInlineQuery }) => {
   let query = ctx.update.inline_query.query;
-  if (query.startsWith("/")) 
-})
+  let receipeSearch = query + ""
+  if (query.startsWith("/")) {
+    if (query.hasHave("/receipes")) {
+      const recipePuppyAPI = `http://recipepuppy.com/api/?q=${inlineQuery.query}`;
+      const response = await fetch(recipePuppyAPI);
+      const { results } = await response.json();
+      const recipes = results
+        .filter(({ thumbnail }) => thumbnail)
+        .map(({ title, href, thumbnail }) => ({
+          type: "article",
+          id: thumbnail,
+          title: title,
+          description: title,
+          thumb_url: thumbnail,
+          input_message_content: {
+            message_text: title
+          },
+          reply_markup: Markup.inlineKeyboard([
+            Markup.urlButton("Go to recipe", href)
+          ])
+        }));
+      return answerInlineQuery(recipes);
+    }
+  }
+});
 
-bot.on('chosen_inline_result', ({ chosenInlineResult }) => {
-  console.log('chosen inline result', chosenInlineResult)
-})
-  
+bot.on("chosen_inline_result", ({ chosenInlineResult }) => {
+  console.log("chosen inline result", chosenInlineResult);
+});
+
 const app = express();
 
 app.get("/", (req, res) =>
@@ -66,31 +91,30 @@ app.get("/", (req, res) =>
 
 app.use(bot.webhookCallback("/telegram/endpoints/${BOT_TOKEN}"));
 
-app.get("/thank-you", (req, res) => 
-       res.sendFile(__dirname + "/views/thankyou.html"))
+app.get("/thank-you", (req, res) =>
+  res.sendFile(__dirname + "/views/thankyou.html")
+);
 
-app.get("/report-a-bug", (req, res) => 
-       res.sendFile(__dirname + "/views/report.html"))
+app.get("/report-a-bug", (req, res) =>
+  res.sendFile(__dirname + "/views/report.html")
+);
 
 app.use(function(err, req, res, next) {
   console.error(err.stack);
-  res
-    .status(500)
-    .send({
-      status: 500,
-      desciption:
-        "Something went berserk. Either check the code, consult the docs or contact Support"
-    });
+  res.status(500).send({
+    status: 500,
+    desciption:
+      "Something went berserk. Either check the code, consult the docs or contact Support"
+  });
 });
 
 app.use(function(err, req, res, next) {
   console.error(err.stack);
-  res
-    .status(404)
-    .send({
-      status: 404,
-      desciption: "Whoops! That didn't found on our side. Check the url or change some code."
-    });
+  res.status(404).send({
+    status: 404,
+    desciption:
+      "Whoops! That didn't found on our side. Check the url or change some code."
+  });
 });
 
 var listener = app.listen(process.env.PORT, function() {
