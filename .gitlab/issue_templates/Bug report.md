@@ -4,4 +4,5 @@
 
 ## System Information
 
-**Telegram App Version and Build ID**: (specify what version are )
+**Device**: (Specify your device's OS Name, version and release branch. Also include)
+**Telegram App Version and Build ID**: (specify what version are you experiencing problem)
