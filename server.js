@@ -40,11 +40,20 @@ bot.use(stage.middleware())
 const getBotInfo = new Scene()
 getBotInfo.command('about', (ctx) => ctx.reply(""))
 
-// 
+// Get bot information and print from console logs
 bot.telegram.getMe().then((bot_informations) => {
     bot.options.username = bot_informations.username;
     console.log("The webhook endpoint is ready to deploy. Your Telegram bot username is "+bot_informations.username);
 });
+
+bot.on('inline_query', async ({ inlineQuery, answerInlineQuery }) => {
+  let query = ctx.update.inline_query.query;
+  if (query.startsWith("/")) 
+})
+
+bot.on('chosen_inline_result', ({ chosenInlineResult }) => {
+  console.log('chosen inline result', chosenInlineResult)
+})
   
 const app = express();
 
@@ -59,6 +68,9 @@ app.use(bot.webhookCallback("/telegram/endpoints/${BOT_TOKEN}"));
 
 app.get("/thank-you", (req, res) => 
        res.sendFile(__dirname + "/views/thankyou.html"))
+
+app.get("/report-a-bug", (req, res) => 
+       res.sendFile(__dirname + "/views/report.html"))
 
 app.use(function(err, req, res, next) {
   console.error(err.stack);
