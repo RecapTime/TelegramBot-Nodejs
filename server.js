@@ -2,7 +2,6 @@
 
 const Telegraf = require("telegraf");
 const express = require("express");
-const mongo = require('mongodb').MongoClient
 const axios = require('axios')
 const fs = require('fs')
 const data = require('./data')
@@ -11,6 +10,7 @@ const Stage = require('telegraf/stage')
 const Scene = require('telegraf/scenes/base')
 const { leave } = Stage
 const stage = new Stage()
+const {Extra, Markup} = Telegraf
 
 // Get project slug for Glitch and Heroku deployments, fallbacks to default if none
 const GLITCH_PROJECT_SLUG = process.PROJECT_DOMAIN || "handsome-sheet";
@@ -33,23 +33,18 @@ const webhookReceiverUrl =
 // Pull the token to get started.
 const bot = new Telegraf(BOT_TOKEN);
 
-// We are using MongoDB for data
-mongo.connect(data.mongoLink, {useNewUrlParser: true}, (err, client) => {
-  if (err) {
-    sendError(err)
-  }
-
-  const db = client.db('recaptime_tgbotdb')
-  mongo.connect(data.mongoLink, {useNewUrlParser: true}, (err, client) => {
-  
-  bot.telegram.setWebhook(webhookReceiverUrl)
-});
 
 bot.use(session())
 bot.use(stage.middleware())
 
-const authWithTGPassport = new Scene
+const getBotInfo = new Scene()
+getBotInfo.command('about', (ctx) => ctx.reply(""))
 
+// 
+bot.telegram.getMe().then((bot_informations) => {
+    bot.options.username = bot_informations.username;
+    console.log("The webhook endpoint is ready to deploy. Your Telegram bot username is "+bot_informations.username);
+});
   
 const app = express();
 
@@ -91,18 +86,6 @@ var listener = app.listen(process.env.PORT, function() {
     "Your Express app is listening on port " + listener.address().port
   );
 });
-  
-function updateUser (ctx, active) {
-  let jetzt = active ? 'active' : 'blocked'
-  db.collection('allUsers').updateOne({userId: ctx.from.id}, {$set: {status: jetzt}}, {upsert: true, new: true})
-}
-  
-function sendError (err, ctx) {
-  if (err.toString().includes('message is not modified')) {
-    return
-  }
-  bot.telegram.sendMessage(data.dev, `Someoe`, { parse_mode: 'markdown' })
-}
 
 // Remove the code below for local deployments and deployments outside Glitch.com
 // It's better to get your own copy of this project.
@@ -118,5 +101,4 @@ process.on("SIGTERM", function() {
       "/optional/path/here",
     process.exit
   );
-});
 });

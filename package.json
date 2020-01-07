@@ -17,7 +17,6 @@
     "pm2": "^4.2.1",
     "telegraf": "^3.35.0",
     "axios": "^0.19.0",
-    "mongodb": "^3.4.1",
     "nodemon": "^2.0.2"
   },
   "engines": {
@@ -33,5 +32,8 @@
     "glitch",
     "express",
     "node-telegram-bot-api"
-  ]
+  ],
+  "bugs": {
+    "url": "https://handsome-sheet.glitch.me/"
+  }
 }
