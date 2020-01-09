@@ -18,6 +18,15 @@ const HEROKU_APP_NAME = process.env.HEROKU_APP_NAME;
 
 // Pull token
 const BOT_TOKEN = process.env.TGBOT_TOKEN;
+if (BOT_TOKEN.length > 45) {
+  console.error("That's too much! Bot tokens must be 45 characters.")
+  process.exit(1)
+} else if (BOT_TOKEN.length < 45) {
+  console.error("")
+  process.exit(1)
+} else {
+  console.log("The bot token is successfully retrived. Looking for app url...")
+}
 
 // Automatically resolves webhook URls for different deployments.
 const webhookReceiverUrl =
@@ -29,6 +38,8 @@ const webhookReceiverUrl =
   "https://" +
     HEROKU_APP_NAME +
     ".herokuapp.com/telegram/endpoints/${BOT_TOKEN}";
+
+// Get the app base url for diffrent works.
 const AppBaseUrl = process.env.APP_URL || "https://"+GLITCH_PROJECT_SLUG+".glitch.me" || process.env.NOW_URL || "https://"+HEROKU_APP_NAME+"herokuapp.com"
 
 // Pull the token to get started.
@@ -37,8 +48,12 @@ const bot = new Telegraf(BOT_TOKEN);
 bot.use(session());
 bot.use(stage.middleware());
 
+// Manage scenes
 const getBotInfo = new Scene();
-getBotInfo.command("about", ctx => ctx.reply(""));
+getBotInfo.command("about", ctx => ctx.reply("*About the bot*"));
+
+const speedTest = new Scene()
+speedTest.command("status", )
 
 // Get bot information and print from console logs
 bot.telegram.getMe().then(bot_informations => {
@@ -94,6 +109,14 @@ bot.on('inline_query', ctx => {
     }
 })
 
+bot.use((ctx, next) => {
+  const start = new Date()
+  return next().then(() => {
+    const ms = new Date() - start
+    console.log('response time %sms', ms)
+  })
+})
+
 const app = express();
 
 app.get("/", (req, res) =>
@@ -112,6 +135,9 @@ app.get("/thank-you", (req, res) =>
 app.get("/report-a-bug", (req, res) =>
   res.sendFile(__dirname + "/views/report.html")
 );
+
+app.get("/telegram/endpoints/${BOT_TOKEN/metadata}", (req, res) =>
+       res.))
 
 app.use(function(err, req, res, next) {
   console.error(err.stack);
