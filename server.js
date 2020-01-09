@@ -14,7 +14,7 @@ const { Extra, Markup } = Telegraf;
 
 // Get project slug for Glitch and Heroku deployments, fallbacks to default if none
 const GLITCH_PROJECT_SLUG = process.PROJECT_DOMAIN || "handsome-sheet";
-const HEROKU_APP_URL = process.env.HEROKU_APP_NAME;
+const HEROKU_APP_NAME = process.env.HEROKU_APP_NAME;
 
 // Pull token
 const BOT_TOKEN = process.env.TGBOT_TOKEN;
@@ -27,8 +27,9 @@ const webhookReceiverUrl =
   process.env.APP_URL + "/telegram/endpoints/${BOT_TOKEN}" ||
   process.env.NOW_URL + "/telegram/endpoints/${BOT_TOKEN}" ||
   "https://" +
-    HEROKU_APP_URL +
+    HEROKU_APP_NAME +
     ".herokuapp.com/telegram/endpoints/${BOT_TOKEN}";
+const AppBaseUrl = process.env.APP_URL || "https://"+GLITCH_PROJECT_SLUG+".glitch.me" || process.env.NOW_URL || "https://"+HEROKU_APP_NAME+"herokuapp.com"
 
 // Pull the token to get started.
 const bot = new Telegraf(BOT_TOKEN);
@@ -72,7 +73,7 @@ bot.on('inline_query', ctx => {
             let full_message;
             let dice=Math.floor(Math.random()*8)+1; // Let's throw a dice for a random message. (1, 8)
             switch(dice){
-                case 1: full_message = "IMHO, "+name_target+" sucks."; break;
+                case 1: full_message = "Something went berserk went looking for"+name_target; break;
                 case 2: full_message = "IMHO, "+name_target+" is awesome"; break;
                 case 3: full_message = name_target+" is not a nice people for me..."; break;
                 case 4: full_message = name_target+" for me you are c- Eh! You wanted!"; break;
@@ -85,8 +86,8 @@ bot.on('inline_query', ctx => {
             return ctx.answerInlineQuery([{
                 type: 'article',
                 id: ctx.update.inline_query.id, 
-                title: 'Our bot doesn't , 
-                description: 'What does '+bot.options.username+' thinks about '+name_target+'?',
+                title: "Our bot doesn't found that.", 
+                description: 'The Recap Time bot thoght',
                 input_message_content: {message_text: full_message}
             }], {cache_time: 0});
         }
@@ -117,7 +118,8 @@ app.use(function(err, req, res, next) {
   res.status(500).send({
     status: 500,
     desciption:
-      "Something went berserk. Either check the code, consult the docs or contact Support"
+      "Something went berserk. Either check the code, consult the docs or contact Support",
+    "issueTracker": "https://gitlab.com/MadeByThePinsTeam-DevLabs/"
   });
 });
 
@@ -126,7 +128,8 @@ app.use(function(err, req, res, next) {
   res.status(404).send({
     status: 404,
     desciption:
-      "Whoops! That didn't found on our side. Check the url or change some code."
+      "Whoops! That didn't found on our side. Check the url or change some code.",
+    triggeredErrorUrl: AppBaseUrl
   });
 });
 
