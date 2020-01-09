@@ -32,12 +32,12 @@ if (BOT_TOKEN.length > 45) {
 const webhookReceiverUrl =
   "https://" +
     GLITCH_PROJECT_SLUG +
-    ".glitch.me/telegram/endpoints/${BOT_TOKEN}" ||
-  process.env.APP_URL + "/telegram/endpoints/${BOT_TOKEN}" ||
-  process.env.NOW_URL + "/telegram/endpoints/${BOT_TOKEN}" ||
+    ".glitch.me/telegram/endpoints/"+BOT_TOKEN
+  process.env.APP_URL + "/telegram/endpoints/"+BOT_TOKEN
+  process.env.NOW_URL + "/telegram/endpoints/"+BOT_TOKEN
   "https://" +
     HEROKU_APP_NAME +
-    ".herokuapp.com/telegram/endpoints/${BOT_TOKEN}";
+    ".herokuapp.com/telegram/endpoints/"+BOT_TOKEN
 
 // Get the app base url for diffrent works.
 const AppBaseUrl = process.env.APP_URL || "https://"+GLITCH_PROJECT_SLUG+".glitch.me" || process.env.NOW_URL || "https://"+HEROKU_APP_NAME+"herokuapp.com"
@@ -126,7 +126,7 @@ app.get("/", (req, res) =>
   })
 );
 
-app.use(bot.webhookCallback("/telegram/endpoints/${BOT_TOKEN}"));
+app.use(bot.webhookCallback("/telegram/endpoints/"+BOT_TOKEN))
 
 app.get("/thank-you", (req, res) =>
   res.sendFile(__dirname + "/views/thankyou.html")
@@ -137,7 +137,7 @@ app.get("/report-a-bug", (req, res) =>
 );
 
 app.get("/telegram/endpoints/${BOT_TOKEN/metadata}", (req, res) =>
-       res.))
+       res.send({ botUsername: bot_informations.username }))
 
 app.use(function(err, req, res, next) {
   console.error(err.stack);
